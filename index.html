@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tumblr Photo Gallery</title>
+    <link href="css/gallery.css" rel="stylesheet" type="text/css" />
+    <script>
+      function onLoad() {
+
+        document.body.onload = null;
+        var viewerEl = document.querySelectorAll('.viewer-pane')[0];
+        viewerEl.addEventListener('transitionend', function (e) {
+          if (e.target == viewerEl) {
+            var child = viewerEl.children[0].children[0]
+            child.classList.add('state-image-active');
+          }
+        });
+        viewerEl.classList.add('state-viewer-pane-open');
+
+        document.body.onkeydown = function (e) {
+          if (e.keyCode == 37) {
+            var activeImages = viewerEl.querySelectorAll('.state-image-active');
+            if (!activeImages.length) return;
+
+            var activeImage = activeImages[0];
+            var newImage = activeImage.previousElementSibling;
+
+            if (newImage != null) {
+              e.preventDefault();
+
+              activeImage.classList.remove('state-image-active');
+              activeImage.setAttribute('style', 'transform: translateX(500%)');
+
+              newImage.classList.add('state-image-active');
+              newImage.setAttribute('style', '');
+            }
+          }
+          else if (e.keyCode == 39) {
+            var activeImages = viewerEl.querySelectorAll('.state-image-active');
+            if (!activeImages.length) return;
+
+            var activeImage = activeImages[0];
+            var newImage = activeImage.nextElementSibling;
+
+            if (newImage != null) {
+              e.preventDefault();
+
+              activeImage.classList.remove('state-image-active');
+              activeImage.setAttribute('style', 'transform: translateX(-500%)');
+
+              newImage.classList.add('state-image-active');
+              newImage.setAttribute('style', '');
+            }
+          }
+        }
+      }
+    </script>
+  </head>
+  <body onload="onLoad()">
+    <figure class="viewer-pane">
+      <div class="viewer-images">
+        <img src="http://40.media.tumblr.com/a3c4f2d7d5e1ec170c06a7af598c9cd4/tumblr_mypnouTJgl1t1kdcio1_540.png" />
+        <img src="http://40.media.tumblr.com/bc869339bf7b110dc9a4b3e63528e184/tumblr_mypnouTJgl1t1kdcio2_1280.png" />
+        <img src="http://40.media.tumblr.com/6a238e4b546e32db630dd7c7ab4544a0/tumblr_mypnouTJgl1t1kdcio3_1280.png" />
+      </div>
+      <figcaption class="viewer-caption">
+        <p>Here's some stuff I guess</p>
+      </figcaption>
+    </figure>
+  </body>
+</html>
