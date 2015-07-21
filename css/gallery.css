@@ -41,6 +41,10 @@ p {
 
 */
 
+.viewer {
+  display: none;
+}
+
 .viewer-caption {
   background-color: rgba(28, 32, 9, 0.5);
   border-bottom: 1px solid rgba(236, 255, 56, 0.5);
