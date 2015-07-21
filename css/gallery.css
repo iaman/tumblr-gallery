@@ -28,6 +28,11 @@ html {
   padding: 0;
 }
 
+p {
+  margin: 0;
+  padding: 0;
+}
+
 
 
 /*
@@ -51,9 +56,39 @@ html {
   width: 100%;
 }
 
-.viewer-caption p {
+.viewer-form {
   margin: 0;
   padding: 0;
+  text-align: center;
+  transform: translateY(0);
+  transition: transform 250ms ease-in-out;
+  width: 100%;
+}
+
+.viewer-form-input {
+  background: rgba(236, 255, 56, 0.1);
+  border: 1px solid rgba(236, 255, 56, 0.5);
+  box-shadow: 0 0 0 #ECFF38;
+  margin: 12px auto;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.viewer-form-input, .viewer-form-submit {
+  -webkit-appearance: none;
+  border-radius: 3px;
+  color: #ECFF38;
+  display: block;
+  font-size: 16px;
+  line-height: 24px;
+  outline: none;
+  padding: 12px;
+}
+
+.viewer-form-submit {
+  background: #283F12;
+  border: none;
+  margin: 0 auto;
+  transition: background-color 100ms ease, padding 100ms ease;
 }
 
 .viewer-images {
@@ -115,12 +150,39 @@ html {
   transition-delay: 200ms;
 }
 
+.viewer-form[disabled] {
+  transform: translateY(-200%);
+}
+
+.viewer-form-input:focus {
+  border-color: #ECFF38;
+  box-shadow: 0 1px 3px rgba(236, 255, 56, 0.5);
+  outline: none;
+}
+
+.viewer-form-submit:focus, .viewer-form-submit:hover {
+  outline: none;
+  padding: 11px 12px 13px;
+}
+
+.viewer-form-submit:active {
+  background-color: #203910;
+  outline: none;
+  padding: 16px 12px 8px;
+}
+
 .viewer-images .state-image-active {
   transform: translateX(0);
 }
 
-@media screen and (min-width: 960px) {
-  .viewer-images {
-    width: 80%;
-  }
+
+
+/*
+
+  UTILITY
+
+*/
+
+.hidden {
+  display: none !important;
 }
