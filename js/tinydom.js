@@ -1,7 +1,6 @@
-var TinyDOMSelection;
-
-TinyDOMSelection = (function () {
+window.TinyDOMSelection = (function () {
   TinyDOMSelection.name = 'TinyDOMSelection';
+
 
   function TinyDOMSelection (options) {
     if (typeof options == 'undefined' || typeof options.elements == 'undefined') return null;
@@ -14,6 +13,17 @@ TinyDOMSelection = (function () {
     for (i = 0; i < this.elements.length; i++) {
       el = this.elements[i];
       el.classList.add(className);
+    }
+
+    return this;
+  }
+
+  TinyDOMSelection.prototype.bind = function(eventName, callback) {
+    var el, i;
+
+    for (i = 0; i < this.elements.length; i++) {
+      el = this.elements[i];
+      el.addEventListener(eventName, callback);
     }
 
     return this;
@@ -87,17 +97,21 @@ TinyDOMSelection = (function () {
   return TinyDOMSelection;
 })();
 
-window.TinyDOMSelection = TinyDOMSelection;
-
-var tinyDOM = {
-  select: function (selector) {
+window.tinyDOM = {
+  select: function (selector, parent) {
     var selection, type;
 
     type = typeof selector;
+
     if (type == 'undefined') return null;
-    else if (type == 'TinyDOMSelection') return selector;
+
+    else if (selector instanceof TinyDOMSelection) {
+      return selector;
+    }
+    
     else if (type == 'string') {
-      return this.wrap(document.querySelectorAll(selector));
+      if (typeof parent == 'undefined') parent = document;
+      return this.wrap(parent.querySelectorAll(selector));
     }
   },
 
