@@ -90,14 +90,14 @@ TinyDOMSelection = (function () {
 window.TinyDOMSelection = TinyDOMSelection;
 
 var tinyDOM = {
-  select: function () {
+  select: function (selector) {
     var selection, type;
 
-    type = typeof arguments[0];
+    type = typeof selector;
     if (type == 'undefined') return null;
-    else if (type == 'TinyDOMSelection') return arguments[0];
+    else if (type == 'TinyDOMSelection') return selector;
     else if (type == 'string') {
-      return this.wrap(document.querySelectorAll(arguments[0]));
+      return this.wrap(document.querySelectorAll(selector));
     }
   },
 
