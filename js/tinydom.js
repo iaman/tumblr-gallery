@@ -7,6 +7,8 @@ window.TinyDOMSelection = (function () {
     this.elements = options.elements;
   }
 
+  // I could DRY up a TON of this by writing a forEach helper method
+
   TinyDOMSelection.prototype.bind = function(eventName, callback) {
     var el, i;
 
@@ -18,7 +20,18 @@ window.TinyDOMSelection = (function () {
     return this;
   }
 
-  TinyDOMSelection.prototype.find = function(selector) {
+  TinyDOMSelection.prototype.unbind = function(eventName, listener) {
+    var el, i;
+
+    for (i = 0; i < this.elements.length; i++) {
+      el = this.elements[i];
+      el.removeEventListener(eventName, listener);
+    }
+
+    return this;
+  }
+
+  TinyDOMSelection.prototype.select = function(selector) {
     var i, j, children, selections;
     children = [];
 
@@ -90,6 +103,8 @@ window.TinyDOMSelection = (function () {
         el.setAttribute(attribute, value);
       }
     }
+
+    return this;
   }
 
   TinyDOMSelection.prototype.clearAttribute = TinyDOMSelection.prototype.setAttribute;
@@ -102,6 +117,8 @@ window.TinyDOMSelection = (function () {
       el = this.elements[i];
       el.innerHTML = html;
     }
+
+    return this;
   }
 
   TinyDOMSelection.prototype.style = function(styles) {
@@ -127,11 +144,13 @@ window.TinyDOMSelection = (function () {
 
         for (j = 0; j < elStyles.length; j++) {
           rule = elStyles[j];
-          key = rule.split[':'];
+          key = rule.split(':')[0];
+
           if (typeof styles[key] != 'undefined') {
             newStyles.push(key + ':' + styles[key]);
             delete styles[key];
           }
+
           else {
             newStyles.push(rule);
           }
@@ -174,7 +193,9 @@ window.tinyDOM = {
     }
     
     else if (type == 'string') {
-      if (parent instanceof TinyDOMSelection) return parent.find(selector);
+      // I could optimize this for ID selection, but I'm not using any so whatever
+
+      if (parent instanceof TinyDOMSelection) return parent.select(selector);
       else if (typeof parent == 'undefined') parent = document;
       selection = parent.querySelectorAll(selector)
 
