@@ -112,7 +112,7 @@ window.TinyDOMSelection = (function () {
       el = this.elements[i];
       elStyles = el.getAttribute('style');
 
-      if (typeof elStyle == 'object') {
+      if (typeof elStyles == 'object') {
         keys = Object.keys(styles);
 
         for (j = 0; j < keys.length; j++) {
@@ -152,7 +152,7 @@ window.TinyDOMSelection = (function () {
         newStyles = reducedStyles;
       }
 
-      el.setAttribute('style', reducedStyles.join(';'));
+      el.setAttribute('style', newStyles.join(';'));
     }
 
     return this;
