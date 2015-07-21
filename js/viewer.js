@@ -160,9 +160,9 @@ window.Viewer = {
   },
 
   hideViewer: function () {
+    Viewer.viewer.html('');
     Viewer.viewer.addClass('hidden');
     Viewer.viewer.unbind('transitionend', Viewer.hideViewer);
-    Viewer.viewer.html('');
   },
 
   hideViewerPane: function (e) {
