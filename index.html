@@ -4,6 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Tumblr Photo Gallery</title>
     <link href="css/gallery.css" rel="stylesheet" type="text/css" />
+    <script src="js/tinydom.js" type="text/javascript"></script>
     <script src="js/viewer.js" type="text/javascript"></script>
     <script>
       function onLoad() {
@@ -57,7 +58,7 @@
       }
     </script>
   </head>
-  <body onload="onLoad()">
+  <body onload="Viewer.init()">
     <figure class="viewer-pane">
       <div class="viewer-images">
         <img src="http://40.media.tumblr.com/a3c4f2d7d5e1ec170c06a7af598c9cd4/tumblr_mypnouTJgl1t1kdcio1_540.png" />
